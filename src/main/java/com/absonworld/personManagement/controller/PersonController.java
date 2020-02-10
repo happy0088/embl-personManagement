@@ -31,7 +31,7 @@ public class PersonController {
     @GetMapping("/persons")
     public PersonResponse getAllPerson() {
         PersonResponse response = new PersonResponse();
-        response.setPersons(service.getAllPersons());
+        response.setPerson(service.getAllPersons());
         return response;
     }
 

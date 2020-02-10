@@ -13,31 +13,52 @@ public class PersonController {
     PersonService service;
 
     /**
-     * Get all users list.
+     * Health Check APi.
      *
-     * @return the list
+     * @return the string
      */
-    @GetMapping("/persons")
-    public List<String> getAllPersons() {
-        List<String> userList = new ArrayList<>();
-        userList.add("Abhishek");
-        userList.add("happy");
-        userList.add("Lavy");
-        return userList;
+    @GetMapping("/health")
+    public String healthStatus() {
+        return "Service is UP and Running!!";
     }
 
+    /**
+     * Get All Persons Details.
+     *
+     * @return the string
+     */
+    @GetMapping("/getAll")
+    public List<Person> getAllPersons() {
+        return service.getAllPersons();
+    }
+
+    /**
+     * Add New Person.
+     *
+     * @return the person list
+     */
     @PostMapping(path = "/addPerson", consumes = "application/json", produces = "application/json")
     public List<Person> addPerson(@RequestBody Person personDetails) {
         System.out.println("Person Added is " + personDetails.getFirst_name());
-        return service.addPayee(personDetails);
+        return service.addPerson(personDetails);
     }
 
+    /**
+     * Deletes a Person .
+     *
+     * @return the list
+     */
     @PostMapping(path = "/deletePerson", consumes = "application/json", produces = "application/json")
     public List<Person> deletePerson(@RequestBody Person personDetails) {
         System.out.println("Deleted Person is " + personDetails.getFirst_name());
         return service.deletePayee(personDetails);
     }
 
+    /**
+     * Update the Person List.
+     *
+     * @return the list
+     */
     @PostMapping(path = "/updatePerson", consumes = "application/json", produces = "application/json")
     public List<Person> updatePerson(@RequestBody Person personDetails) {
         System.out.println("Deleted Person is " + personDetails.getFirst_name());

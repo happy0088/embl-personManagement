@@ -6,23 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonService {
+    H2JDBCService dbService = new H2JDBCService();
     List<Person> personList = new ArrayList<>();
 
-    public List<Person> addPayee(Person person) {
+    public List<Person> addPerson(Person person) {
         System.out.println("Person" + person.getFirst_name() + " added successfully.");
-        personList.add(person);
+        int count = dbService.createPerson(person);
         return personList;
     }
 
     public List<Person> deletePayee(Person person) {
         System.out.println("Person" + person.getFirst_name() + " deleted successfully.");
-        personList.remove(person);
+        dbService.deletePerson(person);
         return personList;
     }
 
     public List<Person> updatePayee(Person person) {
         System.out.println("Person" + person.getFirst_name() + " updated successfully.");
-        personList.add(person);
+        int status = dbService.updatePerson(person.getPersonId());
         return personList;
+    }
+
+    public List<Person> getAllPersons() {
+        return dbService.getAllPersonDetails();
     }
 }

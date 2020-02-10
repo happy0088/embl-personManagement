@@ -184,7 +184,7 @@ public class H2JDBCService {
 
 
 
-    public int updatePassword(int cid, String password) {
+    public int updatePerson(int cid) {
         String sql = "update USER set password =  \'" + password + "\' where cid =" + cid;
         try {
             stmt = conn.createStatement();
@@ -295,4 +295,6 @@ public class H2JDBCService {
         return personList;
     }
 
+    public void deletePerson(Person person) {
+    }
 }

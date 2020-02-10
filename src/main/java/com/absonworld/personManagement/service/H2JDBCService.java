@@ -143,7 +143,7 @@ public class H2JDBCService {
         try {
             stmt = conn.createStatement();
             String sql = "INSERT INTO USER(firstName,lastName,favouriteColor,age,hobby) " +
-                    "VALUES (" + person.getFirst_name() + ", " + person.getLast_name() + ", " + person.getFavourite_color() + "," +
+                    "VALUES (" + person.getFirst_name() + ", " + person.getLast_name() + ", " + person.getFavourite_colour() + "," +
                     " " + person.getAge() +
                     " " + person.getHobby() + ")";
 
@@ -152,6 +152,34 @@ public class H2JDBCService {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public Person getPersonByID(Long id) {
+        printTableData("PERSON");
+        Person person = null;
+        String sql = "SELECT * FROM PERSON where personId = " + id;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            // STEP 4: Extract data from result set
+            {
+                while (rs.next()) {
+                    person = new Person();
+                    // Retrieve by column name
+                    person.setPersonId(rs.getLong("personId"));
+                    person.setFirst_name(rs.getString("firstName"));
+                    person.setLast_name(rs.getString("lastName"));
+                    person.setFavourite_colour(rs.getString("favouriteColor"));
+                    person.setAge(rs.getInt("age"));
+                    // person.setHobby(rs.getString("hobby"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
     }
 
     public Person getPersonDetails(String firstName) {
@@ -167,12 +195,12 @@ public class H2JDBCService {
                 while (rs.next()) {
                     person = new Person();
                     // Retrieve by column name
-                    person.setPersonId(rs.getInt("cid"));
+                    person.setPersonId(rs.getLong("personId"));
                     person.setFirst_name(rs.getString("firstName"));
                     person.setLast_name(rs.getString("lastName"));
-                    person.setFavourite_color(rs.getString("favouriteColor"));
+                    person.setFavourite_colour(rs.getString("favouriteColor"));
                     person.setAge(rs.getInt("age"));
-                   // person.setHobby(rs.getString("hobby"));
+                    // person.setHobby(rs.getString("hobby"));
                 }
             }
 
@@ -183,9 +211,8 @@ public class H2JDBCService {
     }
 
 
-
-    public int updatePerson(int cid) {
-        String sql = "update USER set password =  \'" + password + "\' where cid =" + cid;
+    public int updatePerson(Person person) {
+        String sql = "update USER set firstName =  \'" + person.getFirst_name() + "\' where personId =" + person.getPersonId();
         try {
             stmt = conn.createStatement();
             int count = stmt.executeUpdate(sql);
@@ -279,10 +306,10 @@ public class H2JDBCService {
                 while (rs.next()) {
                     Person person = new Person();
                     // Retrieve by column name
-                    person.setPersonId(rs.getInt("cid"));
+                    person.setPersonId(rs.getLong("personId"));
                     person.setFirst_name(rs.getString("firstName"));
                     person.setLast_name(rs.getString("lastName"));
-                    person.setFavourite_color(rs.getString("favouriteColor"));
+                    person.setFavourite_colour(rs.getString("favouriteColor"));
                     person.setAge(rs.getInt("age"));
                     // person.setHobby(rs.getString("hobby"));
                     personList.add(person);

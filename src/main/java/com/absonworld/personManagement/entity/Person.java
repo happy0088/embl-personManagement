@@ -1,14 +1,19 @@
 package com.absonworld.personManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class Person {
 
-    int personId;
+    @JsonIgnore
+    Long personId;
+
     String first_name;
     String last_name;
     int age;
-    String favourite_color;
+
+    String favourite_colour;
     List<String> hobby;
 
     public String getFirst_name() {
@@ -35,12 +40,12 @@ public class Person {
         this.age = age;
     }
 
-    public String getFavourite_color() {
-        return favourite_color;
+    public String getFavourite_colour() {
+        return favourite_colour;
     }
 
-    public void setFavourite_color(String favourite_color) {
-        this.favourite_color = favourite_color;
+    public void setFavourite_colour(String favourite_colour) {
+        this.favourite_colour = favourite_colour;
     }
 
     public List<String> getHobby() {
@@ -51,11 +56,11 @@ public class Person {
         this.hobby = hobby;
     }
 
-    public int getPersonId() {
+    public Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
     }
 
@@ -66,7 +71,7 @@ public class Person {
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", age=" + age +
-                ", favourite_color='" + favourite_color + '\'' +
+                ", favourite_color='" + favourite_colour + '\'' +
                 ", hobby=" + hobby +
                 '}';
     }

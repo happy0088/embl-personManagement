@@ -23,11 +23,15 @@ public class PersonService {
 
     public List<Person> updatePayee(Person person) {
         System.out.println("Person" + person.getFirst_name() + " updated successfully.");
-        int status = dbService.updatePerson(person.getPersonId());
+        int status = dbService.updatePerson(person);
         return personList;
     }
 
     public List<Person> getAllPersons() {
         return dbService.getAllPersonDetails();
+    }
+
+    public Person getPerson(Long personId) {
+        return dbService.getPersonByID(personId);
     }
 }

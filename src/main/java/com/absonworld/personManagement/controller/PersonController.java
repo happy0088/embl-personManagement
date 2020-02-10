@@ -1,16 +1,17 @@
 package com.absonworld.personManagement.controller;
 
 import com.absonworld.personManagement.entity.Person;
+import com.absonworld.personManagement.entity.PersonResponse;
 import com.absonworld.personManagement.service.PersonService;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
 public class PersonController {
 
-    PersonService service;
+    PersonService service = new PersonService();
 
     /**
      * Health Check APi.
@@ -27,9 +28,21 @@ public class PersonController {
      *
      * @return the string
      */
-    @GetMapping("/getAll")
-    public List<Person> getAllPersons() {
-        return service.getAllPersons();
+    @GetMapping("/persons")
+    public PersonResponse getAllPerson() {
+        PersonResponse response = new PersonResponse();
+        response.setPersons(service.getAllPersons());
+        return response;
+    }
+
+    /**
+     * Get Person Details.
+     *
+     * @return the string
+     */
+    @GetMapping("/person/{id}")
+    public Person getPerson(@PathVariable Long id) {
+        return service.getPerson(id);
     }
 
     /**
@@ -59,10 +72,14 @@ public class PersonController {
      *
      * @return the list
      */
-    @PostMapping(path = "/updatePerson", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/updatePerson", consumes = "application/json", produces = "application/json")
     public List<Person> updatePerson(@RequestBody Person personDetails) {
-        System.out.println("Deleted Person is " + personDetails.getFirst_name());
-        return service.updatePayee(personDetails);
+        if (null != service.getPerson(personDetails.getPersonId())) {
+            System.out.println("Updated Person is " + personDetails.getFirst_name());
+            return service.updatePayee(personDetails);
+        } else {
+            return addPerson(personDetails);
+        }
     }
 
 }

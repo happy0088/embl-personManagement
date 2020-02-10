@@ -2,9 +2,7 @@ package com.absonworld.personManagement.controller;
 
 import com.absonworld.personManagement.entity.Person;
 import com.absonworld.personManagement.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +10,6 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class PersonController {
 
-    @Autowired
     PersonService service;
 
     /**

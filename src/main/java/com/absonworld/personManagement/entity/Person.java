@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Person {
 
+    int personId;
     String first_name;
     String last_name;
     int age;
@@ -50,10 +51,19 @@ public class Person {
         this.hobby = hobby;
     }
 
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
-                "first_name='" + first_name + '\'' +
+                "personId=" + personId +
+                ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", age=" + age +
                 ", favourite_color='" + favourite_color + '\'' +

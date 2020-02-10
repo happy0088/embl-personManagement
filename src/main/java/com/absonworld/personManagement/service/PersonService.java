@@ -15,9 +15,9 @@ public class PersonService {
         return personList;
     }
 
-    public List<Person> deletePayee(Person person) {
-        System.out.println("Person" + person.getFirst_name() + " deleted successfully.");
-        dbService.deletePerson(person);
+    public List<Person> deletePayee(Long id) {
+        System.out.println("Person" + id + " deleted successfully.");
+        dbService.deletePerson(id);
         return personList;
     }
 

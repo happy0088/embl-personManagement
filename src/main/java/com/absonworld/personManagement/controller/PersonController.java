@@ -61,10 +61,10 @@ public class PersonController {
      *
      * @return the list
      */
-    @PostMapping(path = "/deletePerson", consumes = "application/json", produces = "application/json")
-    public List<Person> deletePerson(@RequestBody Person personDetails) {
-        System.out.println("Deleted Person is " + personDetails.getFirst_name());
-        return service.deletePayee(personDetails);
+    @DeleteMapping(path = "/deletePerson/{id}", consumes = "application/json", produces = "application/json")
+    public List<Person> deletePerson(@PathVariable Long id) {
+        System.out.println("Deleted Person is " + id);
+        return service.deletePayee(id);
     }
 
     /**
@@ -81,5 +81,4 @@ public class PersonController {
             return addPerson(personDetails);
         }
     }
-
 }

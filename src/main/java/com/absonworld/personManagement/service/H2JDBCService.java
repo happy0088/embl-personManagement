@@ -322,6 +322,20 @@ public class H2JDBCService {
         return personList;
     }
 
-    public void deletePerson(Person person) {
+    public int deletePerson(Long id) {
+        {
+            String sql = "Delete from USER where personId =" + id;
+            try {
+                stmt = conn.createStatement();
+                int count = stmt.executeUpdate(sql);
+                printTableData("USER");
+                System.out.println("Deleted "+id);
+                return count;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
+
     }
 }

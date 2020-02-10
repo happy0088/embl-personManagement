@@ -50,7 +50,7 @@ public class PersonController {
      *
      * @return the person list
      */
-    @PostMapping(path = "/addPerson", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/person", consumes = "application/json", produces = "application/json")
     public List<Person> addPerson(@RequestBody Person personDetails) {
         System.out.println("Person Added is " + personDetails.getFirst_name());
         return service.addPerson(personDetails);
@@ -61,7 +61,7 @@ public class PersonController {
      *
      * @return the list
      */
-    @DeleteMapping(path = "/deletePerson/{id}", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(path = "/person/{id}", consumes = "application/json", produces = "application/json")
     public List<Person> deletePerson(@PathVariable Long id) {
         System.out.println("Deleted Person is " + id);
         return service.deletePayee(id);
@@ -72,8 +72,8 @@ public class PersonController {
      *
      * @return the list
      */
-    @PutMapping(path = "/updatePerson", consumes = "application/json", produces = "application/json")
-    public List<Person> updatePerson(@RequestBody Person personDetails) {
+    @PutMapping(path = "/person/{id}", consumes = "application/json", produces = "application/json")
+    public List<Person> updatePerson(@RequestBody Person personDetails,@PathVariable Long id) {
         if (null != service.getPerson(personDetails.getPersonId())) {
             System.out.println("Updated Person is " + personDetails.getFirst_name());
             return service.updatePayee(personDetails);

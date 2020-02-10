@@ -31,7 +31,20 @@ public class PersonController {
 
     @PostMapping(path = "/addPerson", consumes = "application/json", produces = "application/json")
     public List<Person> addPerson(@RequestBody Person personDetails) {
-        System.out.println("Payee is " + personDetails.getFirst_name());
+        System.out.println("Person Added is " + personDetails.getFirst_name());
         return service.addPayee(personDetails);
     }
+
+    @PostMapping(path = "/deletePerson", consumes = "application/json", produces = "application/json")
+    public List<Person> deletePerson(@RequestBody Person personDetails) {
+        System.out.println("Deleted Person is " + personDetails.getFirst_name());
+        return service.deletePayee(personDetails);
+    }
+
+    @PostMapping(path = "/updatePerson", consumes = "application/json", produces = "application/json")
+    public List<Person> updatePerson(@RequestBody Person personDetails) {
+        System.out.println("Deleted Person is " + personDetails.getFirst_name());
+        return service.updatePayee(personDetails);
+    }
+
 }

@@ -13,12 +13,12 @@
 
 # Build:
   * Install dependencies -
-    #install maven  :
-    sudo apt-get -y install maven
+        install maven  :
+        sudo apt-get -y install maven
 
   * Build/Compile & run unit Tests
-    Execute the below command inside "embl-personManagement" folder .
-    mvn clean install
+        Execute the below command inside "embl-personManagement" folder .
+            mvn clean install
 
 
 # Run :

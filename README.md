@@ -1,5 +1,6 @@
 # embl-personManagement
     This application serves the purpose of managing persons details with store/update/retrieve and delete functionalities .
+    Its a click to Run appplicaiton with in-memory database for the CRUD operations and secured by token base application Key .
 
 # Tech Stack :
     Service -
@@ -7,7 +8,8 @@
         Database- H2 (in Memory).
         JWT token authentication implemented .
 
-# The application is running at port 9090 .
+# Port:
+    The application is running at port 9090 .
 
 # Build:
   * Install dependencies -

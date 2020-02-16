@@ -28,7 +28,7 @@
     http://localhost:8080/api/v1/health
 
 
-#Steps to hit API :
+# Steps to hit API :
 
 1. Since the API's are JWT authentication protected , we would have to generate a Bearer token in order to successfully get the response .
 

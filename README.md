@@ -57,6 +57,18 @@
   -H 'cache-control: no-cache' \
   -H 'postman-token: b1418543-367b-ee48-6221-098db2d8a626'
 
+API contracts :
 
+1. post - localhost:9090/authenticate
+    PAYLOAD :{"username":"happy" , "password":"password"}
+
+2. get - localhost:9090/api/v1/persons - GET ALL PERSONS .
+curl -X GET \
+  http://localhost:8080/api/v1/persons \
+  -H 'authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE1ODE4ODMzMTcsImlhdCI6MTU4MTg2NTMxN30.n5k9uYk81vquqF1t0ilRHoRwlViMqchDca0Lrk7HSBfX_3ApaTs0WK19C4BNM-q4kZAmC7iAxPxpcK2SGg1XSg' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: c8b7cdc3-e568-105c-a792-8ac55406f59e'
+
+3. localhost:9090/api/v1/person/{id}
 
 

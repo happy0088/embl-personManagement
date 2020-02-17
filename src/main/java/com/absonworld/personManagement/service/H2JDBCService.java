@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -200,7 +201,7 @@ public class H2JDBCService {
                     person.setLast_name(rs.getString("lastName"));
                     person.setFavourite_colour(rs.getString("favouriteColor"));
                     person.setAge(rs.getInt("age"));
-                    // person.setHobby(rs.getString("hobby"));
+                     person.setHobby(Collections.singletonList(rs.getString("hobby")));
                 }
             }
 
@@ -311,7 +312,7 @@ public class H2JDBCService {
                     person.setLast_name(rs.getString("lastName"));
                     person.setFavourite_colour(rs.getString("favouriteColor"));
                     person.setAge(rs.getInt("age"));
-                    // person.setHobby(rs.getString("hobby"));
+                     person.setHobby(Collections.singletonList(rs.getString("hobby")));
                     personList.add(person);
                 }
             }

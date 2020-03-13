@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Person extends RepresentationModel<Person> {
 
-    @JsonIgnore
+    //@JsonIgnore
     Long personId;
 
     String first_name;

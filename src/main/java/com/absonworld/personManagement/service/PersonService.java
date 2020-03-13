@@ -12,19 +12,19 @@ public class PersonService {
     public List<Person> addPerson(Person person) {
         System.out.println("Person" + person.getFirst_name() + " added successfully.");
         int count = dbService.createPerson(person);
-        return personList;
+        return getAllPersons();
     }
 
     public List<Person> deletePayee(Long id) {
         System.out.println("Person" + id + " deleted successfully.");
         dbService.deletePerson(id);
-        return personList;
+        return getAllPersons();
     }
 
     public List<Person> updatePayee(Person person) {
         System.out.println("Person" + person.getFirst_name() + " updated successfully.");
         int status = dbService.updatePerson(person);
-        return personList;
+        return getAllPersons();
     }
 
     public List<Person> getAllPersons() {

@@ -1,9 +1,11 @@
 package com.absonworld.personManagement.entity;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonResponse {
+public class PersonResponse extends RepresentationModel<PersonResponse> {
 
     List<Person> Person = new ArrayList<>();
 

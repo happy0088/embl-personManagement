@@ -143,10 +143,10 @@ public class H2JDBCService {
 
         try {
             stmt = conn.createStatement();
-            String sql = "INSERT INTO USER(firstName,lastName,favouriteColor,age,hobby) " +
-                    "VALUES (" + person.getFirst_name() + ", " + person.getLast_name() + ", " + person.getFavourite_colour() + "," +
+            String sql = "INSERT INTO PERSON(firstName,lastName,favouriteColor,age,hobby) " +
+                    "VALUES (" + "\'"+ person.getFirst_name() +"\'"+ ", " + "\'"+person.getLast_name() +"\'"+ ", " +"\'"+ person.getFavourite_colour() + "\'"+"," +
                     " " + person.getAge() +
-                    " " + person.getHobby() + ")";
+                    ", " + "\'"+person.getHobby() +"\'"+ ")";
 
             return stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -213,11 +213,12 @@ public class H2JDBCService {
 
 
     public int updatePerson(Person person) {
-        String sql = "update USER set firstName =  \'" + person.getFirst_name() + "\' where personId =" + person.getPersonId();
+        String sql = "update PERSON set firstName =  \'" + person.getFirst_name() + "\' where personId =" + person.getPersonId();
         try {
             stmt = conn.createStatement();
             int count = stmt.executeUpdate(sql);
-            printTableData("USER");
+            printTableData("PERSON" +
+                    "");
             return count;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -325,11 +326,11 @@ public class H2JDBCService {
 
     public int deletePerson(Long id) {
         {
-            String sql = "Delete from USER where personId =" + id;
+            String sql = "Delete from PERSON where personId =" + id;
             try {
                 stmt = conn.createStatement();
                 int count = stmt.executeUpdate(sql);
-                printTableData("USER");
+                printTableData("PERSON");
                 System.out.println("Deleted "+id);
                 return count;
             } catch (SQLException e) {

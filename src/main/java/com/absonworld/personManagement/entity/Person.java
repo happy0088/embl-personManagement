@@ -1,10 +1,11 @@
 package com.absonworld.personManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
-public class Person {
+public class Person extends RepresentationModel<Person> {
 
     @JsonIgnore
     Long personId;

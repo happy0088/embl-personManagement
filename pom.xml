@@ -19,11 +19,14 @@
         <java.version>1.8</java.version>
     </properties>
 
+
     <dependencies>
-        <dependency>
+
+
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,6 +46,7 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>2.1.4.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -52,7 +56,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>authen
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -72,11 +76,13 @@
             <version>2.9.2</version>
         </dependency>
 
+
+        <!--HATEOS-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-data-rest</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
+
 
     </dependencies>
 

@@ -1,4 +1,3 @@
-/*
 package com.absonworld.personManagement.config;
 
 import org.springframework.context.annotation.Bean;
@@ -31,25 +30,15 @@ public class swaggerConfig {
                 .build();
     }
 
-  */
-/*  //@Override
+  /*@Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }*//*
+    }*/
 
-
-    @Bean
-    public LinkDiscoverers discoverers() {
-        List<LinkDiscoverer> plugins = new ArrayList<>();
-        plugins.add(new CollectionJsonLinkDiscoverer());
-        return new LinkDiscoverers(SimplePluginRegistry.create(plugins));
-
-    }
-
-    @Override
+     // @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/docApi/v2/api-docs", "/v2/api-docs");
         registry.addRedirectViewController("/docApi/swagger-resources/configuration/ui", "/swagger-resources/configuration/ui");
@@ -57,10 +46,9 @@ public class swaggerConfig {
         registry.addRedirectViewController("/docApi/swagger-resources", "/swagger-resources");
     }
 
-    @Override
+    //@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/docApi/swagger-ui.html**").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
         registry.addResourceHandler("/docApi/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
-*/

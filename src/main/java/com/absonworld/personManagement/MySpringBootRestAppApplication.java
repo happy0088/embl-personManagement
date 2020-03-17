@@ -1,6 +1,7 @@
 package com.absonworld.personManagement;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.client.LinkDiscoverer;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@EnableAutoConfiguration
 public class MySpringBootRestAppApplication {
 
 	public static void main(String[] args) {

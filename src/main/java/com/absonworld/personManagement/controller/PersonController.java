@@ -3,6 +3,8 @@ package com.absonworld.personManagement.controller;
 import com.absonworld.personManagement.entity.Person;
 import com.absonworld.personManagement.entity.PersonResponse;
 import com.absonworld.personManagement.service.PersonService;
+import org.springframework.hateoas.Link;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,9 @@ public class PersonController {
     @GetMapping("/persons")
     public PersonResponse getAllPerson() {
         PersonResponse response = new PersonResponse();
-        response.setPerson(service.getAllPersons());
+        List<Person> allPersons = service.getAllPersons();
+        response.setPerson(allPersons);
+        response.add(linkTo(methodOn(PersonController.class).getAllPerson()).withSelfRel());
         return response;
     }
 
@@ -43,10 +47,15 @@ public class PersonController {
      *
      * @return the string
      */
-    @GetMapping("/person/{id}")
+    @GetMapping(path = "/person/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
     public Person getPerson(@PathVariable Long id) {
         Person person = service.getPerson(id);
         person.add(linkTo(methodOn(PersonController.class).getPerson(id)).withSelfRel());
+        Link deleteLink = linkTo(methodOn(PersonController.class)
+                .deletePerson(id)).withRel("delete-person").withType("DELETE");
+        Link updateLink = linkTo(methodOn(PersonController.class)
+                .updatePerson(null, id)).withRel("update-person").withType("PUT");
+        person.add(deleteLink, updateLink);
         return person;
     }
 
@@ -55,11 +64,16 @@ public class PersonController {
      *
      * @return the person list
      */
-    @PostMapping(path = "/person", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/person", consumes = "application/json", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
     public List<Person> addPerson(@RequestBody Person personDetails) {
         List<Person> personList = service.addPerson(personDetails);
         System.out.println("Person Added is " + personDetails.getFirst_name());
         personList.stream().forEach(person -> {
+            Link deleteLink = linkTo(methodOn(PersonController.class)
+                    .deletePerson(person.getPersonId())).withRel("delete-person").withType("DELETE");
+            Link updateLink = linkTo(methodOn(PersonController.class)
+                    .updatePerson(null, person.getPersonId())).withRel("update-person").withType("PUT");
+            person.add(deleteLink, updateLink);
             person.add(linkTo(methodOn(PersonController.class).addPerson(person)).withSelfRel());
 
         });
@@ -78,6 +92,9 @@ public class PersonController {
         System.out.println("Deleted Person is " + id);
         personList.stream().forEach(person -> {
             person.add(linkTo(methodOn(PersonController.class).deletePerson(id)).withSelfRel());
+            Link updateLink = linkTo(methodOn(PersonController.class)
+                    .updatePerson(null, person.getPersonId())).withRel("update-person").withType("PUT");
+            person.add(updateLink);
 
         });
         return personList;
@@ -96,13 +113,15 @@ public class PersonController {
         if (null != service.getPerson(personDetails.getPersonId())) {
             System.out.println("Updated Person is " + personDetails.getFirst_name());
             personList = service.updatePayee(personDetails);
+            personList.stream().forEach(person -> {
+                Link deleteLink = linkTo(methodOn(PersonController.class)
+                        .deletePerson(person.getPersonId())).withRel("delete-person").withType("DELETE");
+                person.add(linkTo(methodOn(PersonController.class).deletePerson(id)).withSelfRel(), deleteLink);
+            });
         } else {
             personList = addPerson(personDetails);
         }
-        personList.stream().forEach(person -> {
-            person.add(linkTo(methodOn(PersonController.class).deletePerson(id)).withSelfRel());
 
-        });
         return personList;
     }
 }

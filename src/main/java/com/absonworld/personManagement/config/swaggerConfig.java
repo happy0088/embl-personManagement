@@ -1,5 +1,6 @@
 package com.absonworld.personManagement.config;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.client.LinkDiscoverer;
@@ -8,10 +9,13 @@ import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDi
 import org.springframework.plugin.core.SimplePluginRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
+@EnableAutoConfiguration
 
 public class swaggerConfig {
     @Bean
@@ -27,6 +32,20 @@ public class swaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
+                .build()
+                .apiInfo(metadata())
+                .useDefaultResponseMessages(false);
+    }
+
+    @Bean
+    public UiConfiguration createUiConfig(){
+        return new UiConfiguration(null);
+    }
+
+    private ApiInfo metadata(){
+        return new ApiInfoBuilder()
+                .title("Person Management")
+                .description("Use this documentation as a reference")
                 .build();
     }
 

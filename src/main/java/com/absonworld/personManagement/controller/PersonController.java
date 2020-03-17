@@ -3,6 +3,9 @@ package com.absonworld.personManagement.controller;
 import com.absonworld.personManagement.entity.Person;
 import com.absonworld.personManagement.entity.PersonResponse;
 import com.absonworld.personManagement.service.PersonService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +37,10 @@ public class PersonController {
      * @return the string
      */
     @GetMapping("/persons")
+    @ApiOperation(value = "addNumbers", nickname = "addNumbers")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = PersonResponse.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 500, message = "Failure") })
     public PersonResponse getAllPerson() {
         PersonResponse response = new PersonResponse();
         List<Person> allPersons = service.getAllPersons();

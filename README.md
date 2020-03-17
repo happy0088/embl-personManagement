@@ -59,6 +59,9 @@
 
 API contracts :
 
+# Swagger Link :
+    http://localhost:9090/swagger-ui.html#
+
 1. post - localhost:9090/authenticate
     PAYLOAD :{"username":"happy" , "password":"password"}
 
